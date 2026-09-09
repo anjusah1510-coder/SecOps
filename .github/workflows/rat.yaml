@@ -1,4 +1,4 @@
-name: Step 2 - Receive Application Trigger
+name: SecOps Pipeline
 
 on:
   repository_dispatch:
@@ -6,12 +6,13 @@ on:
       - application_push
 
 jobs:
-  receive-trigger:
-    name: Verify Cross-Repo Communication
+  # Stage 1 : Secret Scanning 
+  gitleaks:
+    name: Gitleaks - Secret Scanning 
     runs-on: ubuntu-latest
 
     steps:
-      - name: Display Received Application Information
+      - name: Display Received Application Information 
         run: |
           echo "SecOps Repo received Application trigger"
           echo "Application Repository: ${{ github.event.client_payload.repository }}"
